@@ -9,8 +9,88 @@ enum class Compass {N, S, W, E};
 
 // Write your code here
 class GPS {
+private:
+  double latitude;
+  Compass latitudeDirection;
+  double longitude;
+  Compass longitudeDirection;
+
+public:
+  double getLatitude(){
+    return latitude;  
+  }
+  Compass getLatitudeDirection(){
+    return latitudeDirection;
+  }
+  double getLongitude(){
+    return longitude;
+  }
+  Compass getLongitudeDirection(){
+  return longitudeDirection;
+  }
+
+
+GPS(){
+  latitude = 0;
+  latitudeDirection = Compass::N;
+  longitude = 0;
+  longitudeDirection = Compass::W;
+}
+GPS(double lat, double lon){
+   if ((0.0 <= lat <= 90.0) && (0.0 <= lon <= 180.0)){
+    latitude = lat;
+    latitudeDirection = Compass::N;
+    longitude = lon;
+    longitudeDirection = Compass::W;
+  }
+  
+  if ((0.0 > lat) || (lat > 90.0)){
+    latitude = 0;
+    latitudeDirection = Compass::N;
+  }
+  if ((0.0 > lon) || (lon > 180.0)){
+    longitude = 0;
+    longitudeDirection = Compass::W;
+  }
+}
+GPS(double lat, Compass latdir, double lon, Compass londir){
+  latitude = lat;
+  longitude = lon;
+  latitudeDirection = latdir;
+  longitudeDirection = londir;
+
+  if ((0.0 <= lat <= 90.0) && (0.0 <= lon <= 180.0)){
+    latitude = lat;
+    longitude = lon;
+  }
+  if(latdir != Compass::N ||latdir != Compass::S){
+    latitudeDirection = Compass::N;
+  }
+  if(londir != Compass::W || londir != Compass::E){
+    longitudeDirection = Compass::W;
+  }
+  if(latdir == Compass::N ||latdir == Compass::S){
+    latitudeDirection = latdir;
+  }
+  if(londir == Compass::W || londir == Compass::E){
+    longitudeDirection = londir;
+  }
+
+  if ((0.0 > lat) || (lon > 90.0)){
+    latitude = 0;
+    latitudeDirection = Compass::N;
+  }
+  if ((0.0 > lat) || (lon > 180.0)){
+    longitude = 0;
+    longitudeDirection = Compass::W;
+  }
+}
 
 };
+
+
+
+
 
 //------------------------------
 //   DO NOT MODIFY TEST CASES
